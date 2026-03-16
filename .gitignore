@@ -7,5 +7,4 @@ deploy_host/downloads/
 deploy_host/weights/*.pth
 
 # Local datasets (do not upload)
-deploy_host/data/my_data/
-deploy_host/data/custom_scannet/
+
