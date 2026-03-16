@@ -45,6 +45,44 @@ into:
 - `deploy_host/data/custom_scannet/val/custom_scene_xxxx/{coord,color,normal,segment20}.npy`
 - `deploy_host/data/custom_scannet/val.json`
 
+## 2.1) Scene Data Structure (What each file means)
+
+A single scene folder usually looks like:
+
+```text
+sceneXXXX_YY/
+  coord.npy
+  color.npy
+  normal.npy
+  segment20.npy
+  instance.npy      # optional
+  segment200.npy    # optional
+```
+
+Meaning of each file:
+
+- `coord.npy`  
+  Point coordinates, usually shape `N x 3`, dtype `float32`.
+- `color.npy`  
+  RGB per point, usually shape `N x 3`, dtype `uint8` in range `0~255`.
+- `normal.npy`  
+  Surface normal per point, usually shape `N x 3`, dtype `float32` in range around `[-1, 1]`.
+- `segment20.npy`  
+  ScanNet20 semantic label per point, shape `N`, integer labels (`0~19`), `-1` means ignore/unlabeled.
+- `instance.npy` (optional)  
+  Instance ID per point, shape `N`, integer labels, `-1` means ignore/no instance.
+- `segment200.npy` (optional)  
+  ScanNet200 semantic label per point, shape `N`, integer labels, `-1` means ignore/unlabeled.
+
+Important:
+
+- All per-point files must have the same first dimension `N`.
+- For your current custom inference pipeline, the required minimum is:
+  - `coord.npy`
+  - `color.npy`
+  - `normal.npy`
+  - `segment20.npy` (can be dummy all `-1` for unlabeled data)
+
 ## 3) Download Pretrained Weight (No GitHub Upload Needed)
 
 The checkpoint `scannet-pt-v3m1-0-base-model_best.pth` is publicly downloadable from Hugging Face, so you do **not** need to upload this binary to your GitHub repo.
