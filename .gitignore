@@ -1,0 +1,11 @@
+# Generated artifacts
+deploy_host/exp/
+deploy_host/logs/
+deploy_host/downloads/
+
+# Model checkpoints
+deploy_host/weights/*.pth
+
+# Local datasets (do not upload)
+deploy_host/data/my_data/
+deploy_host/data/custom_scannet/
